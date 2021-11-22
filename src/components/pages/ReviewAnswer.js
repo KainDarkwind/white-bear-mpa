@@ -1,17 +1,11 @@
 import React from "react";
-import Header from "../ui/Header";
-import Navigation from "../ui/Navigation";
 import AppTemplate from "../ui/AppTemplate";
+import { Link } from "react-router-dom";
 import successIcon from "../../icon/success.svg";
 
 export default function ReviewAnswer() {
    return (
       <AppTemplate>
-         <Header />
-         <div class="clearfix"></div>
-
-         <Navigation />
-
          <div class="card">
             <div class="card-body bg-primary lead">
                Bury me smilin' with G's in my pocket, Have a party at my
@@ -31,14 +25,14 @@ export default function ReviewAnswer() {
             </div>
          </div>
 
-         <a href="edit" class="btn btn-link">
+         <Link to="/edit" class="btn btn-link">
             Edit card
-         </a>
+         </Link>
          <div class="float-right">
-            <a href="review-imagery" class="btn btn-outline-primary">
+            <Link to="/review-imagery" class="btn btn-outline-primary">
                Needs work
-            </a>
-            <a href="/review-empty" class="btn btn-primary ml-4">
+            </Link>
+            <Link to="/review-empty" class="btn btn-primary ml-4">
                <img
                   src={successIcon}
                   alt="Thumbs Up Icon"
@@ -46,7 +40,7 @@ export default function ReviewAnswer() {
                   style={{ marginBottom: "5px", marginRight: "4px" }}
                />
                Got it!
-            </a>
+            </Link>
          </div>
       </AppTemplate>
    );

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Landing() {
    return (
@@ -93,8 +94,8 @@ export default function Landing() {
                               <p class="mt-3">Password</p>
                               <input class="form-control" type="text" />
 
-                              <a
-                                 href="/create-answer"
+                              <Link
+                                 to="/create-answer"
                                  id="login-button"
                                  class="
                              btn
@@ -105,7 +106,7 @@ export default function Landing() {
                           "
                               >
                                  Log in
-                              </a>
+                              </Link>
                            </div>
                         </div>
                      </div>

@@ -1,15 +1,10 @@
 import React from "react";
-import Header from "../ui/Header";
-import Navigation from "../ui/Navigation";
 import AppTemplate from "../ui/AppTemplate";
+import { Link } from "react-router-dom";
 
 export default function CreateAnswer() {
    return (
       <AppTemplate>
-         <Header />
-         <div class="clearfix"></div>
-
-         <Navigation />
          <div class="mt-n4 text-center lead text-muted">
             <h4>Add an answer</h4>
          </div>
@@ -29,13 +24,13 @@ export default function CreateAnswer() {
          </div>
          <div>
             <div class="float-right">
-               <a
-                  href="/create-imagery"
+               <Link
+                  to="/create-imagery"
                   class="btn btn-outline-primary"
                   id="next-card"
                >
                   Next
-               </a>
+               </Link>
             </div>
          </div>
       </AppTemplate>

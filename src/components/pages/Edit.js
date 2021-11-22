@@ -1,7 +1,6 @@
 import React from "react";
-import Header from "../ui/Header";
-import Navigation from "../ui/Navigation";
 import AppTemplate from "../ui/AppTemplate";
+import { Link } from "react-router-dom";
 import saveIcon from "../../icon/save.svg";
 
 export default function Edit() {
@@ -22,11 +21,6 @@ export default function Edit() {
             <p class="py-4 ml-2 d-inline">Oops! Our bad. Please try again.</p>
          </div>
          <AppTemplate>
-            <Header />
-            <div class="clearfix"></div>
-
-            <Navigation />
-
             <div class="mt-n3 text-center lead text-muted">
                <h4>Edit card</h4>
             </div>
@@ -59,9 +53,9 @@ export default function Edit() {
                </p>
             </div>
             <div class="mb-5">
-               <a href="/all-cards" class="btn btn-link">
+               <Link to="/all-cards" class="btn btn-link">
                   Discard changes
-               </a>
+               </Link>
                <div class="float-right">
                   <button
                      class="btn btn-primary ml-4 disabled"

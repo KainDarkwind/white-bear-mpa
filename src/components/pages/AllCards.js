@@ -1,17 +1,11 @@
 import React from "react";
-import Header from "../ui/Header";
-import Navigation from "../ui/Navigation";
+import { Link } from "react-router-dom";
 import editIcon from "../../icon/edit.svg";
 import AppTemplate from "../ui/AppTemplate";
 
 export default function AllCards() {
    return (
       <AppTemplate>
-         <Header />
-         <div className="clearfix"></div>
-
-         <Navigation />
-
          <div className="row my-4">
             <div className="col-8">
                <input
@@ -67,7 +61,7 @@ export default function AllCards() {
                </div>
             </div>
 
-            <a href="/edit" className="btn btn-link ml-4 mt-n2 d-flex">
+            <Link to="/edit" className="btn btn-link ml-4 mt-n2 d-flex">
                <img
                   src={editIcon}
                   className="mr-2 mt-1"
@@ -75,7 +69,7 @@ export default function AllCards() {
                   alt="Edit Icon"
                />
                Edit
-            </a>
+            </Link>
          </div>
 
          <div className="d-flex align-items-start">

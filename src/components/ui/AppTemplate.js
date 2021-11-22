@@ -1,4 +1,6 @@
 import React from "react";
+import Header from "../ui/Header";
+import Navigation from "../ui/Navigation";
 
 export default function AppTemplate(props) {
    return (
@@ -14,6 +16,10 @@ export default function AppTemplate(props) {
    offset-md-1
 "
             >
+               <Header />
+               <div className="clearfix"></div>
+
+               <Navigation />
                {props.children}
             </div>
          </div>

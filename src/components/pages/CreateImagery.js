@@ -1,7 +1,6 @@
 import React from "react";
-import Header from "../ui/Header";
-import Navigation from "../ui/Navigation";
 import AppTemplate from "../ui/AppTemplate";
+import { Link } from "react-router-dom";
 import saveIcon from "../../icon/save.svg";
 import successIcon from "../../icon/success.svg";
 import errorIcon from "../../icon/error.svg";
@@ -26,10 +25,6 @@ export default function CreateImagery() {
          </div>
 
          <AppTemplate>
-            <Header />
-            <div class="clearfix"></div>
-
-            <Navigation />
             <div class="mt-n3 text-center lead text-muted">
                <h4>Add memorable imagery</h4>
             </div>
@@ -57,9 +52,9 @@ export default function CreateImagery() {
             <div class="text-right mt-2 mb-5 text-muted">
                <span id="create-char-count">0</span>/240
             </div>
-            <a href="/create-answer" class="btn btn-link">
+            <Link to="/create-answer" class="btn btn-link">
                Back to answer
-            </a>
+            </Link>
             <div class="float-right">
                <button class="btn btn-primary ml-4 disabled" id="save-card">
                   <img

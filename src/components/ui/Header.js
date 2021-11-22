@@ -1,16 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import whiteBearLogo from "../../icon/logo-app.svg";
 
 export default function Header() {
    return (
       <div>
-         <a href="/index.html">
+         <Link to="/">
             <img src={whiteBearLogo} alt="White Bear Logo" width="28px" />
-         </a>
+         </Link>
          <h3 className="d-inline text-brand">White Bear</h3>
-         <a href="/" class="btn btn-link float-right">
+         <Link to="/" class="btn btn-link float-right">
             Log Out
-         </a>
+         </Link>
       </div>
    );
 }

@@ -21,7 +21,7 @@ function App() {
             <Route path="/create-imagery" element={<CreateImagery />} />
             <Route path="/review-imagery" element={<ReviewImagery />} />
             <Route path="/review-answer" element={<ReviewAnswer />} />
-            <Route path="/review-answer" element={<ReviewEmpty />} />
+            <Route path="/review-empty" element={<ReviewEmpty />} />
             <Route path="/all-cards" element={<AllCards />} />
             <Route path="/edit" element={<Edit />} />
             <Route path="*" element={<NotFound />} />
