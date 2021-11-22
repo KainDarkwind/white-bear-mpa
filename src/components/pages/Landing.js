@@ -94,7 +94,7 @@ export default function Landing() {
                               <input class="form-control" type="text" />
 
                               <a
-                                 href="/create-answer.html"
+                                 href="/create-answer"
                                  id="login-button"
                                  class="
                              btn
