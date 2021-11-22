@@ -1,4 +1,6 @@
 import React from "react";
+import Header from "../ui/Header";
+import Navigation from "../ui/Navigation";
 
 export default function ReviewImagery() {
    return (
@@ -15,13 +17,7 @@ export default function ReviewImagery() {
            offset-md-1
         "
                >
-                  <a href="/index.html">
-                     <img src="icons/logo-app.svg" width="28px" />
-                  </a>
-                  <h3 class="d-inline text-brand">White Bear</h3>
-                  <a href="/index.html" class="btn btn-link float-right">
-                     Log Out
-                  </a>
+                  <Header />
                   <div class="clearfix"></div>
 
                   <div
@@ -29,21 +25,7 @@ export default function ReviewImagery() {
                      role="navigation"
                      aria-label="Navigation"
                   >
-                     <a href="/create-answer.html" class="btn btn-secondary">
-                        Create New
-                     </a>
-                     <a
-                        href="/review-imagery.html"
-                        class="btn btn-secondary tab-separator"
-                     >
-                        Review
-                     </a>
-                     <a
-                        href="/all-cards.html"
-                        class="btn btn-secondary tab-separator tab-active"
-                     >
-                        All Cards
-                     </a>
+                     <Navigation />
                   </div>
 
                   <div class="card">
