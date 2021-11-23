@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import landingLogo from "../../img/logo-landing.png";
 
 export default function Landing() {
    return (
@@ -7,7 +8,7 @@ export default function Landing() {
          <div class="container">
             <div class="row">
                <div class="col-12">
-                  <img src="images/logo-landing.png" alt="White Bear Logo" />
+                  <img src={landingLogo} alt="White Bear Logo" />
                   <h1 class="d-inline text-brand">White Bear</h1>
                </div>
                <div class="col-xl-8 offset-xl-2 col-lg-10 offset-lg-1">
