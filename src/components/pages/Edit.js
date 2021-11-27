@@ -2,6 +2,9 @@ import React from "react";
 import AppTemplate from "../ui/AppTemplate";
 import { Link } from "react-router-dom";
 import saveIcon from "../../icon/save.svg";
+import memoryCards from "../../mock-data/memory-cards";
+import toDisplayDate from "date-fns/format";
+const memoryCard = memoryCards[2];
 
 export default function Edit() {
    return (
@@ -21,44 +24,49 @@ export default function Edit() {
             <p class="py-4 ml-2 d-inline">Oops! Our bad. Please try again.</p>
          </div>
          <AppTemplate>
-            <div class="mt-n3 text-center lead text-muted">
+            <div className="mt-n3 text-center lead text-muted">
                <h4>Edit card</h4>
             </div>
-            <div class="card mb-5">
-               <div class="card-body d-flex bg-primary lead">
+            <div className="card mb-5">
+               <div className="card-body d-flex bg-primary lead">
                   <textarea
                      rows="6"
-                     id="edit-top-input"
-                     class="d-xs-none"
-                     autofocus
+                     className="d-md-none"
+                     defaultValue={memoryCard.imagery}
+                  ></textarea>
+                  <textarea
+                     rows="4"
+                     className="d-none d-md-block"
+                     defaultValue={memoryCard.imagery}
                   ></textarea>
                </div>
             </div>
 
-            <div class="card mt-n5 mb-5">
-               <div class="card-body bg-secondary lead">
+            <div className="card mt-n5 mb-5">
+               <div className="card-body bg-secondary lead">
                   <textarea
                      rows="6"
                      id="edit-bottom-input"
-                     class="d-xs-none"
+                     className="d-xs-none"
+                     defaultValue={memoryCard.answer}
                      autofocus
                   ></textarea>
                </div>
             </div>
-            <div class="text-right mt-2 mb-5 text-muted">
+            <div className="text-right mt-2 mb-5 text-muted">
                <p>
                   Top: <span id="edit-top-char-count">0</span>/240 &nbsp;
                   &nbsp;Bottom:
                   <span id="edit-bottom-char-count">0</span>/240
                </p>
             </div>
-            <div class="mb-5">
-               <Link to="/all-cards" class="btn btn-link">
+            <div className="mb-5">
+               <Link to="/all-cards" className="btn btn-link">
                   Discard changes
                </Link>
-               <div class="float-right">
+               <div className="float-right">
                   <button
-                     class="btn btn-primary ml-4 disabled"
+                     className="btn btn-primary ml-4 disabled"
                      id="save-edit-card"
                   >
                      <img
@@ -71,30 +79,30 @@ export default function Edit() {
                   </button>
                </div>
             </div>
-            <div class="text-center lead text-muted">
-               <h4 class="text-muted">Card properties</h4>
+            <div className="text-center lead text-muted">
+               <h4 className="text-muted">Card properties</h4>
             </div>
-            <div class="row">
-               <div class="col-4 text-muted">
+            <div className="row">
+               <div className="col-4 text-muted">
                   <p>Created on:</p>
                   <p>Last attempt:</p>
                   <p>Next attempt:</p>
                   <p>Consecutives:</p>
                </div>
-               <div class="col-4">
-                  <p>Jun 24, 2112</p>
-                  <p>Feb 30, 2020</p>
-                  <p>Dec 35, 2020</p>
-                  <p>So many</p>
+               <div className="col-4">
+                  <p>{toDisplayDate(memoryCard.createdAt, "MMM. d, y")}</p>
+                  <p>{toDisplayDate(memoryCard.lastAttemptAt, "MMM. d, y")}</p>
+                  <p>{toDisplayDate(memoryCard.nextAttemptAt, "MMM. d, y")}</p>
+                  <p>{memoryCard.totalSuccessfulAttempts}</p>
                </div>
-               <div class="col-4"></div>
-               <div class="mt-3 col checkbox" id="delete-button">
+               <div className="col-4"></div>
+               <div className="mt-3 col checkbox" id="delete-button">
                   <label>
                      <input type="checkbox" value="" />
                      Show Delete Button
                   </label>
                </div>
-               <div class="col btn btn-danger d-none" id="delete-card">
+               <div className="col btn btn-danger d-none" id="delete-card">
                   Delete Card
                </div>
             </div>

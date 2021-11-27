@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import saveIcon from "../../icon/save.svg";
 import successIcon from "../../icon/success.svg";
 import errorIcon from "../../icon/error.svg";
+import memoryCards from "../../mock-data/memory-cards";
+const memoryCard = memoryCards[2];
 
 export default function CreateImagery() {
    return (
@@ -40,13 +42,7 @@ export default function CreateImagery() {
 
             <div class="card mt-n5 mb-5">
                <div class="card-body bg-secondary lead">
-                  How many brothers fell victim to the streets? Rest in peace,
-                  young brotha, there's a heaven for a G Be a lie if I told you
-                  that I never thought of death My brothas, we the last ones
-                  left, but life goes on How many brothers fell victim to the
-                  streets? Rest in peace, young brotha, there's a heaven for a G
-                  Be a lie if I told you that I never thought of death My
-                  brothas, we the last ones left, but life goes on
+                  {memoryCard.answer}
                </div>
             </div>
             <div class="text-right mt-2 mb-5 text-muted">
