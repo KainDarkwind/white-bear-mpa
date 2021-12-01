@@ -6,24 +6,26 @@ import MemoryCard from "../ui/MemoryCard";
 export default function AllCards() {
    return (
       <AppTemplate>
-         <div class="row my-4">
-            <div class="col-8">
+         <div className="row my-4">
+            <div className="col-8">
                <input
-                  class="form-control form-control-sm"
+                  className="form-control form-control-sm"
                   type="text"
                   placeholder="Search for a word"
                />
             </div>
-            <div class="col-4">
-               <button class="btn btn-primary btn-sm btn-block">Search</button>
+            <div className="col-4">
+               <button className="btn btn-primary btn-sm btn-block">
+                  Search
+               </button>
             </div>
          </div>
-         <div class="row my-4 no-gutters">
-            <div class="col-4">
-               <p class="text-muted mt-1">Sort cards by</p>
+         <div className="row my-4 no-gutters">
+            <div className="col-4">
+               <p className="text-muted mt-1">Sort cards by</p>
             </div>
-            <div class="col-8">
-               <select class="form-control form-control-sm">
+            <div className="col-8">
+               <select className="form-control form-control-sm">
                   <option>Hardest</option>
                   <option>Easiest</option>
                   <option>Oldest</option>

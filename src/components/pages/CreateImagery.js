@@ -11,27 +11,29 @@ export default function CreateImagery() {
    return (
       <>
          <div
-            class="bg-success w-100 lead justify-content-center fixed-top d-none"
+            className="bg-success w-100 lead justify-content-center fixed-top d-none"
             id="overlay-success"
          >
             <img src={successIcon} alt="Success Icon" width="32px" />
-            <p class="py-4 ml-2 d-inline">Card created!</p>
+            <p className="py-4 ml-2 d-inline">Card created!</p>
          </div>
 
          <div
-            class="bg-danger w-100 lead justify-content-center fixed-top d-none"
+            className="bg-danger w-100 lead justify-content-center fixed-top d-none"
             id="overlay-fail"
          >
             <img src={errorIcon} alt="Error Icon" width="32px" />
-            <p class="py-4 ml-2 d-inline">Oops! Our bad. Please try again.</p>
+            <p className="py-4 ml-2 d-inline">
+               Oops! Our bad. Please try again.
+            </p>
          </div>
 
          <AppTemplate>
-            <div class="mt-n3 text-center lead text-muted">
+            <div className="mt-n3 text-center lead text-muted">
                <h4>Add memorable imagery</h4>
             </div>
-            <div class="card mb-5">
-               <div class="card-body d-flex bg-primary lead">
+            <div className="card mb-5">
+               <div className="card-body d-flex bg-primary lead">
                   <textarea
                      rows="6"
                      id="create-imagery-input"
@@ -40,19 +42,19 @@ export default function CreateImagery() {
                </div>
             </div>
 
-            <div class="card mt-n5 mb-5">
-               <div class="card-body bg-secondary lead">
+            <div className="card mt-n5 mb-5">
+               <div className="card-body bg-secondary lead">
                   {memoryCard.answer}
                </div>
             </div>
-            <div class="text-right mt-2 mb-5 text-muted">
+            <div className="text-right mt-2 mb-5 text-muted">
                <span id="create-char-count">0</span>/240
             </div>
-            <Link to="/create-answer" class="btn btn-link">
+            <Link to="/create-answer" className="btn btn-link">
                Back to answer
             </Link>
-            <div class="float-right">
-               <button class="btn btn-primary ml-4 disabled" id="save-card">
+            <div className="float-right">
+               <button className="btn btn-primary ml-4 disabled" id="save-card">
                   <img
                      src={saveIcon}
                      alt="Save Icon"

@@ -8,21 +8,25 @@ const memoryCard = memoryCards[2];
 export default function ReviewAnswer() {
    return (
       <AppTemplate>
-         <div class="card">
-            <div class="card-body bg-primary lead">{memoryCard.imagery}</div>
+         <div className="card">
+            <div className="card-body bg-primary lead">
+               {memoryCard.imagery}
+            </div>
          </div>
-         <div class="card mb-5">
-            <div class="card-body bg-secondary lead">{memoryCard.answer}</div>
+         <div className="card mb-5">
+            <div className="card-body bg-secondary lead">
+               {memoryCard.answer}
+            </div>
          </div>
 
-         <Link to="/edit" class="btn btn-link">
+         <Link to="/edit" className="btn btn-link">
             Edit card
          </Link>
-         <div class="float-right">
-            <Link to="/review-imagery" class="btn btn-outline-primary">
+         <div className="float-right">
+            <Link to="/review-imagery" className="btn btn-outline-primary">
                Needs work
             </Link>
-            <Link to="/review-empty" class="btn btn-primary ml-4">
+            <Link to="/review-empty" className="btn btn-primary ml-4">
                <img
                   src={successIcon}
                   alt="Thumbs Up Icon"

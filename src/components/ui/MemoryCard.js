@@ -17,7 +17,7 @@ export default function MemoryCard(props) {
          <Link to="/edit" className="btn btn-link ml-4 mt-n2 d-flex">
             <img
                src={editIcon}
-               className="mr-2 mt-1"
+               className="align-bottom mr-2 mt-1"
                width="20px"
                alt="Edit Icon"
             />

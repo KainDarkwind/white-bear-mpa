@@ -10,18 +10,20 @@ export default function Edit() {
    return (
       <>
          <div
-            class="bg-success w-100 lead justify-content-center fixed-top d-none"
+            className="bg-success w-100 lead justify-content-center fixed-top d-none"
             id="overlay-success"
          >
             <img src="/icons/success.svg" alt="Success Icon" width="32px" />
-            <p class="py-4 ml-2 d-inline">Card created!</p>
+            <p className="py-4 ml-2 d-inline">Card created!</p>
          </div>
          <div
-            class="bg-danger w-100 lead justify-content-center fixed-top d-none"
+            className="bg-danger w-100 lead justify-content-center fixed-top d-none"
             id="overlay-fail"
          >
             <img src="/icons/error.svg" alt="Error Icon" width="32px" />
-            <p class="py-4 ml-2 d-inline">Oops! Our bad. Please try again.</p>
+            <p className="py-4 ml-2 d-inline">
+               Oops! Our bad. Please try again.
+            </p>
          </div>
          <AppTemplate>
             <div className="mt-n3 text-center lead text-muted">
