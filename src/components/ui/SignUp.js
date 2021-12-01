@@ -6,7 +6,7 @@ import { v4 as getUuid } from "uuid";
 export default class SignUp extends React.Component {
    constructor(props) {
       super(props);
-      console.log("In a new class component");
+      console.log("In sign up component");
       this.state = {
          isDisplayingLowerInputs: false,
          isDisplayingUpperInputs: true,

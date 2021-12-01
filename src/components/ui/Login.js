@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import classnames from "classnames";
 import hash from "object-hash";
 import { v4 as getUuid } from "uuid";
@@ -7,7 +7,7 @@ import { v4 as getUuid } from "uuid";
 export default class Login extends React.Component {
    constructor(props) {
       super(props);
-      console.log("In a new class component");
+      console.log("In login component");
       this.state = {
          emailError: "",
          hasEmailError: false,

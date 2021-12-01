@@ -9,7 +9,7 @@ export default function Header() {
             <img src={whiteBearLogo} alt="White Bear Logo" width="28px" />
          </Link>
          <h3 className="d-inline text-brand">White Bear</h3>
-         <Link to="/" class="btn btn-link float-right">
+         <Link to="/" className="btn btn-link float-right">
             Log Out
          </Link>
       </div>

@@ -72,6 +72,11 @@ Example:
    font-family: $font-family-serif;
 }
 
+.disabled {
+   pointer-events: fill !important;
+   cursor: not-allowed;
+}
+
 .landing-button {
    background-color: $blue;
    outline-color: $blue;
