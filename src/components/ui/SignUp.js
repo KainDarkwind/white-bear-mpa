@@ -1,7 +1,7 @@
 import React from "react";
 import classnames from "classnames";
 import hash from "object-hash";
-import { v4 as uuidv4 } from "uuid";
+import { v4 as getUuid } from "uuid";
 
 export default class SignUp extends React.Component {
    constructor(props) {
@@ -11,7 +11,9 @@ export default class SignUp extends React.Component {
          isDisplayingLowerInputs: false,
          isDisplayingUpperInputs: true,
          emailError: "",
+         hasEmailError: false,
          passwordError: "",
+         hasPasswordError: false,
       };
    }
 
@@ -24,25 +26,31 @@ export default class SignUp extends React.Component {
       });
    }
 
-   setEmailState(emailInput) {
+   async setEmailState(emailInput) {
       const emailPattern = /^[\w]\S*@[a-zA-Z\d][\w-]+\.[a-zA-Z]{2,}$/;
       const isValidEmail = emailPattern.test(emailInput);
 
       if (emailInput.length === 0) {
          console.log("There is no email text entered.");
-         this.setState({ emailError: "Please enter your email address." });
+         this.setState({
+            emailError: "Please enter your email address.",
+            hasEmailError: true,
+         });
       } else if (isValidEmail === false) {
          console.log("Doesn't pass the regex vibe.");
 
-         this.setState({ emailError: "Please enter a valid email address." });
+         this.setState({
+            emailError: "Please enter a valid email address.",
+            hasEmailError: true,
+         });
       } else {
          console.log("The email is just right.");
 
-         this.setState({ emailError: "" });
+         this.setState({ emailError: "", hasEmailError: false });
       }
    }
 
-   setPasswordState(passwordInput, emailInput) {
+   async setPasswordState(passwordInput, emailInput) {
       const normalizedPassword = passwordInput.toLowerCase().trim();
       const passwordInputLength = normalizedPassword.length;
       const listOfEmailParts = emailInput.split("@");
@@ -53,12 +61,16 @@ export default class SignUp extends React.Component {
       if (passwordInputLength === 0) {
          console.log("There is no password text entered.");
 
-         this.setState({ passwordError: "Please create a password." });
+         this.setState({
+            passwordError: "Please create a password.",
+            hasPasswordError: true,
+         });
       } else if (passwordInputLength < 9) {
          console.log("The password is too short.");
 
          this.setState({
             passwordError: "Your password must be at least 9 characters.",
+            hasPasswordError: true,
          });
       } else if (
          normalizedPassword.includes(localEmail) &&
@@ -69,38 +81,48 @@ export default class SignUp extends React.Component {
          this.setState({
             passwordError:
                "All or part of your email address cannot be used in your password.",
+            hasPasswordError: true,
          });
       } else if (uniqChars.length < 3) {
          console.log("Find more chars, yo.");
          this.setState({
             passwordError: `Your password must contain at least 3 unique characters`,
+            hasPasswordError: true,
          });
       } else if (unacceptablePasswords.includes(normalizedPassword)) {
          console.log("The password cannot be lame.");
-         console.log(
-            "This is the final list of unacceptable passwords:",
-            unacceptablePasswords
-         );
 
          this.setState({
             passwordError: `Your password contains a commonly used password, "${passwordInput}" and can be easily discovered by attackers. Please use something else.`,
+            hasPasswordError: true,
          });
       } else {
          console.log("The password is just right.");
 
-         this.setState({ passwordError: "" });
+         this.setState({ passwordError: "", hasPasswordError: false });
       }
    }
 
-   validateAndCreateUser() {
+   async validateAndCreateUser() {
       const emailInput = document.getElementById("sign-up-email-input").value;
       const passwordInput = document.getElementById(
          "sign-up-password-input"
       ).value;
 
-      this.setEmailState(emailInput);
-      this.setPasswordState(passwordInput, emailInput);
-
+      await this.setEmailState(emailInput);
+      await this.setPasswordState(passwordInput, emailInput);
+      if (
+         this.state.hasEmailError === false &&
+         this.state.hasPasswordError === false
+      ) {
+         const user = {
+            id: getUuid(),
+            email: emailInput,
+            password: hash(passwordInput),
+            createdAt: Date.now(),
+         };
+         console.log(user);
+      }
       //   if (emailInput.length === 0)
       //      this.setState({ emailError: "Please enter your email address." });
    }
@@ -145,12 +167,12 @@ export default class SignUp extends React.Component {
                      <input
                         className={classnames({
                            "form-control": true,
-                           "is-invalid": this.state.emailError !== "",
+                           "is-invalid": this.state.hasEmailError,
                         })}
                         id="sign-up-email-input"
                         type="text"
                      />
-                     {this.state.emailError !== "" && (
+                     {this.state.hasEmailError && (
                         <p className="text-danger" id="sign-up-email-error">
                            {this.state.emailError}
                         </p>
@@ -162,12 +184,12 @@ export default class SignUp extends React.Component {
                      <input
                         className={classnames({
                            "form-control": true,
-                           "is-invalid": this.state.passwordError !== "",
+                           "is-invalid": this.state.hasPasswordError,
                         })}
                         id="sign-up-password-input"
                         type="password"
                      />
-                     {this.state.passwordError !== "" && (
+                     {this.state.hasPasswordError && (
                         <p className="text-danger" id="sign-up-password-error">
                            {this.state.passwordError}
                         </p>
