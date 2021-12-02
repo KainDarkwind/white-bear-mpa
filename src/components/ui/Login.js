@@ -3,11 +3,13 @@ import React from "react";
 import classnames from "classnames";
 import hash from "object-hash";
 import { v4 as getUuid } from "uuid";
+import { Navigate } from "react-router-dom";
 
 export default class Login extends React.Component {
    constructor(props) {
       super(props);
       console.log("In login component");
+
       this.state = {
          emailError: "",
          hasEmailError: false,
@@ -67,12 +69,14 @@ export default class Login extends React.Component {
          this.state.hasEmailError === false &&
          this.state.hasPasswordError === false
       ) {
+         <Navigate to="/create-answer" />;
          const user = {
             id: getUuid(),
             email: emailInput,
             password: hash(passwordInput),
             createdAt: Date.now(),
          };
+
          console.log(user);
       }
       //   if (emailInput.length === 0)
@@ -118,7 +122,6 @@ export default class Login extends React.Component {
                   )}
 
                   <button
-                     to="/create-answer"
                      id="login-button"
                      className="
                              btn

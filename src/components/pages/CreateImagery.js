@@ -64,7 +64,6 @@ export default class CreateImagery extends React.Component {
                         rows="6"
                         id="create-imagery-input"
                         onChange={(e) => this.setImageryTextAndOverflow(e)}
-                        autofocus
                      ></textarea>
                   </div>
                </div>

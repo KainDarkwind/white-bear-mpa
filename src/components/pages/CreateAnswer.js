@@ -39,7 +39,6 @@ export default class CreateAnswer extends React.Component {
                      rows="10"
                      className="d-xs-none"
                      onChange={(e) => this.setAnswerTextAndOverflow(e)}
-                     autofocus
                   ></textarea>
                </div>
             </div>

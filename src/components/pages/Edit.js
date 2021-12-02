@@ -98,7 +98,6 @@ export default class Edit extends React.Component {
                         className="d-xs-none"
                         defaultValue={memoryCard.answer}
                         onChange={(e) => this.setAnswerTextAndOverflow(e)}
-                        autoFocus
                      ></textarea>
                   </div>
                </div>
