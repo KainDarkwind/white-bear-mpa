@@ -1,6 +1,6 @@
 import React from "react";
 import "./style/master.scss";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Landing from "./components/pages/Landing";
 import AllCards from "./components/pages/AllCards";
 import CreateAnswer from "./components/pages/CreateAnswer";
@@ -15,17 +15,17 @@ import NotFound from "./components/pages/NotFound";
 function App() {
    return (
       <Router>
-         <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/create-answer" element={<CreateAnswer />} />
-            <Route path="/create-imagery" element={<CreateImagery />} />
-            <Route path="/review-imagery" element={<ReviewImagery />} />
-            <Route path="/review-answer" element={<ReviewAnswer />} />
-            <Route path="/review-empty" element={<ReviewEmpty />} />
-            <Route path="/all-cards" element={<AllCards />} />
-            <Route path="/edit" element={<Edit />} />
-            <Route path="*" element={<NotFound />} />
-         </Routes>
+         <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/create-answer" component={CreateAnswer} />
+            <Route exact path="/create-imagery" component={CreateImagery} />
+            <Route exact path="/review-imagery" component={ReviewImagery} />
+            <Route exact path="/review-answer" component={ReviewAnswer} />
+            <Route exact path="/review-empty" component={ReviewEmpty} />
+            <Route exact path="/all-cards" component={AllCards} />
+            <Route exact path="/edit" component={Edit} />
+            <Route component={NotFound} />
+         </Switch>
       </Router>
    );
 }

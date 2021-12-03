@@ -13,7 +13,7 @@ const memoryCard = memoryCards[2];
 export default class CreateImagery extends React.Component {
    constructor(props) {
       super(props);
-      console.log("In edit component");
+      console.log("In create imagery component");
       this.state = {
          answerText: memoryCard.answer,
          imageryText: "",
@@ -22,6 +22,7 @@ export default class CreateImagery extends React.Component {
    }
 
    setImageryTextAndOverflow(e) {
+      console.log(e);
       this.setState({ imageryText: e.target.value });
       if (
          e.target.value.length > MAX_CARD_CHARS ||
@@ -87,25 +88,25 @@ export default class CreateImagery extends React.Component {
                <Link to="/create-answer" className="btn btn-link">
                   Back to answer
                </Link>
-               <div className="float-right">
-                  <button
-                     className={classnames({
-                        btn: true,
-                        "btn-primary": true,
-                        "ml-4": true,
-                        disabled: this.state.hasImageryTextOverflow,
-                     })}
-                     id="save-card"
-                  >
-                     <img
-                        src={saveIcon}
-                        alt="Save Icon"
-                        width="20px"
-                        style={{ marginBottom: "5px", marginRight: "4px" }}
-                     />
-                     Save
-                  </button>
-               </div>
+
+               <button
+                  className={classnames({
+                     btn: true,
+                     "float-right": true,
+                     "btn-primary": true,
+                     "ml-4": true,
+                     disabled: this.state.hasImageryTextOverflow,
+                  })}
+                  id="save-card"
+               >
+                  <img
+                     src={saveIcon}
+                     alt="Save Icon"
+                     width="20px"
+                     style={{ marginBottom: "5px", marginRight: "4px" }}
+                  />
+                  Save
+               </button>
             </AppTemplate>
          </>
       );
