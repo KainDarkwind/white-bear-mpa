@@ -3,17 +3,25 @@ import AppTemplate from "../ui/AppTemplate";
 import { Link } from "react-router-dom";
 import memoryCards from "../../mock-data/memory-cards";
 import axios from "axios";
+import { connect } from "react-redux";
+import actions from "../../store/actions";
 
 const memoryCard = memoryCards[2];
 
-export default class ReviewImagery extends React.Component {
+class ReviewImagery extends React.Component {
    constructor(props) {
       super(props);
       axios
-         .get("https://run.mocky.io/v3/65134c69-6c09-4088-bdd9-183a7941e17f")
-         .then(function (response) {
+         .get(
+            "https://raw.githubusercontent.com/KainDarkwind/white-bear-mpa/main/src/mock-data/memory-cards.json"
+         )
+         .then(function (res) {
             // handle success
-            console.log(response);
+            console.log(res);
+            props.dispatch({
+               type: actions.STORE_QUEUED_CARDS,
+               payload: res.data,
+            });
          })
          .catch(function (error) {
             // handle error
@@ -32,15 +40,21 @@ export default class ReviewImagery extends React.Component {
                </div>
             </div>
 
-            <div className="mt-5">
-               <button className="btn btn-link">Previous card</button>
-               <div className="float-right">
-                  <Link to="/review-answer" className="btn btn-outline-primary">
-                     Show answer
-                  </Link>
-               </div>
-            </div>
+            <Link to="/review-answer" className="mt-5 btn btn-link">
+               Previous card
+            </Link>
+
+            <Link
+               to="/review-answer"
+               className="btn btn-outline-primary float-right"
+            >
+               Show answer
+            </Link>
          </AppTemplate>
       );
    }
 }
+function mapStateToProps() {
+   return {};
+}
+export default connect(mapStateToProps)(ReviewImagery);
