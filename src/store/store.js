@@ -4,8 +4,10 @@ import combineReducers from "./reducers/combineReducers";
 
 const initialState = {
    currentUser: {},
-   queuedCards: [],
-   indexOfCurrentCard: 0,
+   queue: {
+      cards: [],
+      index: 0,
+   },
 };
 
 export default createStore(

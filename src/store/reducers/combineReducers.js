@@ -1,10 +1,8 @@
 import { combineReducers } from "redux";
 import currentUser from "./currentUser";
-import queuedCards from "./queuedCards";
-import indexOfCurrentCard from "./indexOfCurrentCard";
+import queue from "./queue";
 
 export default combineReducers({
    currentUser,
-   queuedCards,
-   indexOfCurrentCard,
+   queue,
 });

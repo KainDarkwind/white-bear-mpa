@@ -15,7 +15,7 @@ class ReviewAnswer extends React.Component {
    }
 
    render() {
-      const memoryCard = this.props.queuedCards[this.props.indexOfCurrentCard];
+      const memoryCard = this.props.queue.cards[this.props.queue.index];
       return (
          <AppTemplate>
             <div className="card">
@@ -63,8 +63,7 @@ class ReviewAnswer extends React.Component {
 
 function mapStateToProps(state) {
    return {
-      queuedCards: state.queuedCards,
-      indexOfCurrentCard: state.indexOfCurrentCard,
+      queue: state.queue,
    };
 }
 export default connect(mapStateToProps)(ReviewAnswer);
