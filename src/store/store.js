@@ -3,7 +3,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import combineReducers from "./reducers/combineReducers";
 
 const initialState = {
-   user: {},
+   currentUser: {},
    queuedCards: [],
    indexOfCurrentCard: 0,
 };
