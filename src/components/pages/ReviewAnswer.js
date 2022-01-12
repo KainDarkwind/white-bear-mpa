@@ -10,8 +10,13 @@ class ReviewAnswer extends React.Component {
    goToNextCard() {
       //todo: if index of current card = length of array of all cards, we've gone to the end of array
 
-      this.props.dispatch({ type: actions.UPDATE_INDEX_OF_CURRENT_CARD });
-      this.props.history.push("/review-imagery");
+      if (this.props.queue.index === this.props.queue.cards.length - 1) {
+         this.props.dispatch({ type: actions.INCREMENT_QUEUE_INDEX });
+         this.props.history.push("/review-empty");
+      } else {
+         this.props.dispatch({ type: actions.INCREMENT_QUEUE_INDEX });
+         this.props.history.push("/review-imagery");
+      }
    }
 
    render() {

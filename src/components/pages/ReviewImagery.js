@@ -10,26 +10,34 @@ import actions from "../../store/actions";
 class ReviewImagery extends React.Component {
    constructor(props) {
       super(props);
-      axios
-         .get(
-            "https://raw.githubusercontent.com/KainDarkwind/white-bear-mpa/main/src/mock-data/memory-cards.json"
-         )
-         .then(function (res) {
-            // handle success
-            console.log(res);
-            props.dispatch({
-               type: actions.STORE_QUEUED_CARDS,
-               payload: res.data,
+      if (props.queue.cards.length === 0) {
+         axios
+            .get(
+               "https://raw.githubusercontent.com/KainDarkwind/white-bear-mpa/main/src/mock-data/memory-cards.json"
+            )
+            .then(function (res) {
+               // handle success
+               console.log(res);
+               props.dispatch({
+                  type: actions.STORE_QUEUED_CARDS,
+                  payload: res.data,
+               });
+            })
+            .catch(function (error) {
+               // handle error
+               console.log(error);
+            })
+            .then(function () {
+               // always executed
             });
-         })
-         .catch(function (error) {
-            // handle error
-            console.log(error);
-         })
-         .then(function () {
-            // always executed
-         });
+      }
    }
+
+   goToPrevCard() {
+      this.props.dispatch({ type: actions.DECREMENT_QUEUE_INDEX });
+      this.props.history.push("/review-answer");
+   }
+
    render() {
       const memoryCard = this.props.queue.cards[this.props.queue.index];
       return (
@@ -40,9 +48,16 @@ class ReviewImagery extends React.Component {
                </div>
             </div>
 
-            <Link to="/review-answer" className="mt-5 btn btn-link">
-               Previous card
-            </Link>
+            {this.props.queue.index > 0 && (
+               <button
+                  className="mt-5 btn btn-link"
+                  onClick={() => {
+                     this.goToPrevCard();
+                  }}
+               >
+                  Previous card
+               </button>
+            )}
 
             <Link
                to="/review-answer"

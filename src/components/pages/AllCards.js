@@ -1,27 +1,48 @@
 import React from "react";
-import memoryCards from "../../mock-data/memory-cards";
 import AppTemplate from "../ui/AppTemplate";
 import MemoryCard from "../ui/MemoryCard";
 import { safelyParseJson } from "../../utils/helpers";
 import orderBy from "lodash/orderBy";
+import axios from "axios";
 
 export default class AllCards extends React.Component {
    constructor(props) {
       super(props);
       console.log("In All Cards component");
 
-      const activeCards = memoryCards.filter((card) => {
-         return card;
-      });
       const defaultOrder = `["totalSuccessfulAttempts", "desc"]`;
-      const params = safelyParseJson(defaultOrder);
-      const orderedCards = orderBy(activeCards, ...params);
       this.state = {
-         activeCards: orderedCards,
-         displayedCards: orderedCards,
+         activeCards: [],
+         displayedCards: [],
          searchInput: "",
          cardOrder: defaultOrder,
       };
+   }
+
+   componentDidMount() {
+      axios
+         .get(
+            "https://raw.githubusercontent.com/KainDarkwind/white-bear-mpa/main/src/mock-data/memory-cards.json"
+         )
+         .then((res) => {
+            // handle success
+            console.log(res.data);
+            const memoryCards = res.data;
+            const activeCards = memoryCards.filter((card) => {
+               return card;
+            });
+            const defaultOrder = `["totalSuccessfulAttempts", "desc"]`;
+            const params = safelyParseJson(defaultOrder);
+            const orderedCards = orderBy(activeCards, ...params);
+            this.setState({
+               activeCards: orderedCards,
+               displayedCards: orderedCards,
+            });
+         })
+         .catch((error) => {
+            // handle error
+            console.log(error);
+         });
    }
 
    updateState(e) {
