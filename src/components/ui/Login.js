@@ -18,6 +18,22 @@ class Login extends React.Component {
       };
    }
 
+   componentDidMount() {
+      axios
+         .get(
+            "https://raw.githubusercontent.com/KainDarkwind/white-bear-mpa/main/src/mock-data/user.json"
+         )
+         .then((res) => {
+            // handle success
+            const currentUser = res.data;
+            console.log(res.data);
+         })
+         .catch((error) => {
+            // handle error
+            console.log(error);
+         });
+   }
+
    async setEmailState(emailInput) {
       const emailPattern = /^[\w]\S*@[a-zA-Z\d][\w-]+\.[a-zA-Z]{2,}$/;
       const isValidEmail = emailPattern.test(emailInput);
