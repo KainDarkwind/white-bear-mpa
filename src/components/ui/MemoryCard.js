@@ -1,25 +1,36 @@
 import React from "react";
 import editIcon from "../../icon/edit.svg";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-export default class MemoryCard extends React.Component {
+import actions from "../../store/actions";
+
+class MemoryCard extends React.Component {
    constructor(props) {
       super(props);
       console.log(props);
       this.state = {};
    }
+
+   storeEditableCard() {
+      this.props.dispatch({
+         type: actions.STORE_EDITABLE_CARD,
+         payload: { card: this.props.memoryCard, prevRoute: "/all-cards" },
+      });
+   }
+
    render() {
       return (
          <div className="d-flex align-items-start">
             <div className="app-card flex-fill">
                <div className="card">
                   <div className="card-body bg-primary">
-                     {this.props.imagery}
+                     {this.props.memoryCard.imagery}
                   </div>
                </div>
                <div className="card mb-5">
                   <div className="card-body bg-secondary">
-                     {this.props.answer}
+                     {this.props.memoryCard.answer}
                   </div>
                </div>
             </div>
@@ -43,3 +54,8 @@ export default class MemoryCard extends React.Component {
       );
    }
 }
+
+function mapStateToProps(state) {
+   return {};
+}
+export default connect(mapStateToProps)(MemoryCard);
