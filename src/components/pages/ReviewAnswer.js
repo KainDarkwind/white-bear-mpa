@@ -7,9 +7,14 @@ import { connect } from "react-redux";
 import actions from "../../store/actions";
 
 class ReviewAnswer extends React.Component {
-   goToNextCard() {
-      //todo: if index of current card = length of array of all cards, we've gone to the end of array
+   constructor(props) {
+      super(props);
+      if (this.props.queue.cards.length === 0) {
+         this.props.history.push("/review-empty");
+      }
+   }
 
+   goToNextCard() {
       if (this.props.queue.index === this.props.queue.cards.length - 1) {
          this.props.dispatch({ type: actions.INCREMENT_QUEUE_INDEX });
          this.props.history.push("/review-empty");
@@ -18,9 +23,18 @@ class ReviewAnswer extends React.Component {
          this.props.history.push("/review-imagery");
       }
    }
+   storeEditableCard() {
+      console.log("storing editable card");
+      const memoryCard = this.props.queue.cards[this.props.queue.index];
+      this.props.dispatch({
+         type: actions.STORE_EDITABLE_CARD,
+         payload: { card: memoryCard, prevRoute: "/review-answer" },
+      });
+   }
 
    render() {
       const memoryCard = this.props.queue.cards[this.props.queue.index];
+      console.log("this is the memoryCard", memoryCard);
       return (
          <AppTemplate>
             <div className="card">
@@ -34,7 +48,13 @@ class ReviewAnswer extends React.Component {
                </div>
             </div>
 
-            <Link to="/edit" className="btn btn-link">
+            <Link
+               to="/edit"
+               className="btn btn-link"
+               onClick={() => {
+                  this.storeEditableCard();
+               }}
+            >
                Edit card
             </Link>
             <div className="float-right">

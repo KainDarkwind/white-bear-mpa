@@ -2,17 +2,20 @@ import React from "react";
 import AppTemplate from "../ui/AppTemplate";
 import { Link } from "react-router-dom";
 import saveIcon from "../../icon/save.svg";
-import memoryCards from "../../mock-data/memory-cards";
 import toDisplayDate from "date-fns/format";
 import classnames from "classnames";
 import { safelyParseJson, MAX_CARD_CHARS } from "../../utils/helpers";
+import { connect } from "react-redux";
+import without from "lodash/without";
+import actions from "../../store/actions";
 
-const memoryCard = memoryCards[2];
-
-export default class Edit extends React.Component {
+class Edit extends React.Component {
    constructor(props) {
       super(props);
       console.log("In edit component");
+      const memoryCard = this.props.editableCard.card;
+      console.log("The answer:", memoryCard.answer);
+      console.log("the image:", memoryCard.imagery);
       this.state = {
          answerText: memoryCard.answer,
          imageryText: memoryCard.imagery,
@@ -56,7 +59,23 @@ export default class Edit extends React.Component {
       }
    }
 
+   deleteCardFromStore() {
+      const deletedCard = this.props.editableCard.card;
+      const cards = this.props.queue.cards;
+      const filteredCards = without(cards, deletedCard);
+      this.props.dispatch({
+         type: actions.STORE_QUEUED_CARDS,
+         payload: filteredCards,
+      });
+      if (filteredCards[this.props.queue.index] === undefined) {
+         this.props.history.push("/review-empty");
+      } else {
+         this.props.history.push("/review-imagery");
+      }
+   }
+
    render() {
+      const memoryCard = this.props.editableCard.card;
       return (
          <>
             <div
@@ -83,7 +102,7 @@ export default class Edit extends React.Component {
                   <div className="card-body d-flex bg-primary lead">
                      <textarea
                         rows="4"
-                        className="d-none d-md-block"
+                        className="d-md-block"
                         defaultValue={memoryCard.imagery}
                         onChange={(e) => this.setImageryTextAndOverflow(e)}
                      ></textarea>
@@ -125,11 +144,15 @@ export default class Edit extends React.Component {
                   </p>
                </div>
                <div className="mb-5">
-                  <Link to="/all-cards" className="btn btn-link">
+                  <Link
+                     to={this.props.editableCard.prevRoute}
+                     className="btn btn-link"
+                  >
                      Discard changes
                   </Link>
                   <div className="float-right">
-                     <button
+                     <Link
+                        to={this.props.editableCard.prevRoute}
                         className={classnames({
                            btn: true,
                            "btn-primary": true,
@@ -147,7 +170,7 @@ export default class Edit extends React.Component {
                            style={{ marginBottom: "5px", marginRight: "4px" }}
                         />
                         Save
-                     </button>
+                     </Link>
                   </div>
                </div>
                <div className="text-center lead text-muted">
@@ -193,7 +216,13 @@ export default class Edit extends React.Component {
                      })}
                      id="delete-card"
                   >
-                     Delete Card
+                     <button
+                        onClick={() => {
+                           this.deleteCardFromStore();
+                        }}
+                     >
+                        Delete Card
+                     </button>
                   </div>
                </div>
             </AppTemplate>
@@ -201,3 +230,11 @@ export default class Edit extends React.Component {
       );
    }
 }
+
+function mapStateToProps(state) {
+   return {
+      editableCard: state.editableCard,
+      queue: state.queue,
+   };
+}
+export default connect(mapStateToProps)(Edit);

@@ -8,6 +8,7 @@ const initialState = {
       cards: [],
       index: 0,
    },
+   editableCard: {},
 };
 
 export default createStore(

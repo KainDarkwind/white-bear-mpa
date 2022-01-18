@@ -5,17 +5,16 @@ import saveIcon from "../../icon/save.svg";
 import successIcon from "../../icon/success.svg";
 import errorIcon from "../../icon/error.svg";
 import classnames from "classnames";
-
-import memoryCards from "../../mock-data/memory-cards";
 import { MAX_CARD_CHARS } from "../../utils/helpers";
-const memoryCard = memoryCards[2];
+import { connect } from "react-redux";
 
-export default class CreateImagery extends React.Component {
+class CreateImagery extends React.Component {
    constructor(props) {
       super(props);
       console.log("In create imagery component");
+
       this.state = {
-         answerText: memoryCard.answer,
+         answerText: this.props.queue.cards[this.props.queue.index].answer,
          imageryText: "",
          hasImageryTextOverflow: true,
       };
@@ -35,6 +34,7 @@ export default class CreateImagery extends React.Component {
    }
 
    render() {
+      const memoryCard = this.props.queue.cards[this.props.queue.index];
       return (
          <>
             <div
@@ -112,3 +112,9 @@ export default class CreateImagery extends React.Component {
       );
    }
 }
+function mapStateToProps(state) {
+   return {
+      queue: state.queue,
+   };
+}
+export default connect(mapStateToProps)(CreateImagery);

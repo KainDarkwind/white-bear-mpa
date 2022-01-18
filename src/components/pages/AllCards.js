@@ -4,18 +4,16 @@ import MemoryCard from "../ui/MemoryCard";
 import { safelyParseJson } from "../../utils/helpers";
 import orderBy from "lodash/orderBy";
 import axios from "axios";
+import actions from "../../store/actions";
 
 export default class AllCards extends React.Component {
    constructor(props) {
       super(props);
-      console.log("In All Cards component");
 
-      const defaultOrder = `["totalSuccessfulAttempts", "desc"]`;
       this.state = {
-         activeCards: [],
-         displayedCards: [],
-         searchInput: "",
-         cardOrder: defaultOrder,
+         order: '[["createdAt"], ["desc"]]',
+         displayedMemoryCards: [],
+         allMemoryCards: [],
       };
    }
 
@@ -28,15 +26,13 @@ export default class AllCards extends React.Component {
             // handle success
             console.log(res.data);
             const memoryCards = res.data;
-            const activeCards = memoryCards.filter((card) => {
-               return card;
-            });
-            const defaultOrder = `["totalSuccessfulAttempts", "desc"]`;
-            const params = safelyParseJson(defaultOrder);
-            const orderedCards = orderBy(activeCards, ...params);
             this.setState({
-               activeCards: orderedCards,
-               displayedCards: orderedCards,
+               displayedMemoryCards: orderBy(
+                  memoryCards,
+                  ["createdAt"],
+                  ["desc"]
+               ),
+               allMemoryCards: orderBy(memoryCards, ["createdAt"], ["desc"]),
             });
          })
          .catch((error) => {
@@ -44,6 +40,15 @@ export default class AllCards extends React.Component {
             console.log(error);
          });
    }
+
+   storeEditableCard = () => {
+      console.log("storing editable card");
+      const memoryCard = this.props.queue.cards[this.props.queue.index];
+      this.props.dispatch({
+         type: actions.STORE_EDITABLE_CARD,
+         payload: { card: memoryCard, prevRoute: "/review-answer" },
+      });
+   };
 
    updateState(e) {
       let value = e.target.value;
@@ -57,13 +62,13 @@ export default class AllCards extends React.Component {
 
    setSearchInput(e) {
       const searchInput = e.target.value;
-      const order = this.state.cardOrder;
+      const order = this.state.order;
 
       const params = safelyParseJson(order);
       const orderedProp = params[0];
       const sortedOrder = params[1];
       this.setState((prevState) => {
-         const filteredCards = prevState.activeCards.filter((card) => {
+         const filteredCards = prevState.displayedMemoryCards.filter((card) => {
             const normalizedSearchInput = searchInput.toLowerCase();
             const normalizedAnswer = card.answer.toLowerCase();
             const normalizedImagery = card.imagery.toLowerCase();
@@ -74,18 +79,24 @@ export default class AllCards extends React.Component {
          });
          return {
             searchInput: searchInput,
-            displayedCards: orderBy(filteredCards, orderedProp, sortedOrder),
+            displayedMemoryCards: orderBy(
+               filteredCards,
+               orderedProp,
+               sortedOrder
+            ),
          };
       });
    }
 
    setCardOrder(e) {
-      const cardOrder = e.target.value;
-      const params = safelyParseJson(cardOrder);
+      const params = safelyParseJson(e.target.value);
       this.setState((prevState) => {
          return {
-            cardOrder: cardOrder,
-            displayedCards: orderBy(prevState.displayedCards, ...params),
+            order: e.target.value,
+            displayedMemoryCards: orderBy(
+               prevState.displayedMemoryCards,
+               ...params
+            ),
          };
       });
    }
@@ -117,7 +128,7 @@ export default class AllCards extends React.Component {
                </div>
                <div className="col-8">
                   <select
-                     value={this.state.cardOrder}
+                     value={this.state.order}
                      onChange={(e) => {
                         this.setCardOrder(e);
                      }}
@@ -134,7 +145,7 @@ export default class AllCards extends React.Component {
                   </select>
                </div>
             </div>
-            {this.state.displayedCards.map((memoryCard) => {
+            {this.state.displayedMemoryCards.map((memoryCard) => {
                return (
                   <MemoryCard
                      answer={memoryCard.answer}
